@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let squares = Array.from(document.querySelectorAll('.grid div'))
   const scoreDisplay = document.querySelector('#score')
   const startBtn = document.querySelector('#start-button')
+  const levelDisplay = document.querySelector('#level')
   const width = 10
   let nextRandom = 0
   let timerId
@@ -10,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const timerIntervalSpeed = 1000
   const colors = [
     '#AEC5EB',
+    '#C1666B',
     '#F9DEC9',
+    '#48A9A6',
     '#E9AFA3',
     '#7B4B94',
     '#D33F49'
@@ -24,11 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
     [width, width * 2, width * 2 + 1, width * 2 + 2]
   ]
 
+  const l2Tetromino = [
+    [0, 1, width + 1, width * 2 + 1],
+    [width, width + 1, width + 2, 2],
+    [1, width + 1, width * 2 + 1, width * 2 + 2],
+    [width, width * 2, width + 1, width + 2]
+  ]
+
   const zTetromino = [
     [width + 1, width + 2, width * 2, width * 2 + 1],
     [0, width, width + 1, width * 2 + 1],
     [width + 1, width + 2, width * 2, width * 2 + 1],
     [0, width, width + 1, width * 2 + 1]
+  ]
+
+  const z2Tetromino = [
+    [width, width + 1, width * 2 + 1, width * 2 + 2],
+    [1, width, width + 1, width * 2],
+    [width, width + 1, width * 2 + 1, width * 2 + 2],
+    [1, width, width + 1, width * 2]
   ]
 
   const tTetromino = [
@@ -51,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     [1, width + 1, width * 2 + 1, width * 3 + 1],
     [width, width + 1, width + 2, width + 3]
   ]
-  const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+  const theTetrominoes = [lTetromino, l2Tetromino, zTetromino, z2Tetromino, tTetromino, oTetromino, iTetromino]
 
   let currentPosition = 4
   let currentRotation = 0
@@ -183,7 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // the Tetrimonoes without rotation
   const upNextTetrominoes = [
     [1, displayWidth + 1, displayWidth * 2 + 1, 2], // lTetromino
+    [0, 1, displayWidth + 1, displayWidth * 2 + 1], // l2Tetromino
     [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1], // zTetromino
+    [displayWidth, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 2 + 2], // z2Tetromino
     [1, displayWidth, displayWidth + 1, displayWidth + 2], // tTetromino
     [0, 1, displayWidth, displayWidth + 1], // oTetromino
     [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1] // iTetromino
@@ -237,28 +256,32 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // level speed up
   function speedUp () {
-    if (score >= 0 && score < 50) {
+    if (score >= 0 && score < 10) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed)
-    } else if (score >= 50 && score < 100) {
+    } else if (score >= 10 && score < 20) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed - 200)
-    } else if (score >= 100 && score < 200) {
+      levelDisplay.innerHTML = '2'
+    } else if (score >= 20 && score < 30) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed - 500)
-    } else if (score >= 200 && score < 300) {
+      levelDisplay.innerHTML = '3'
+    } else if (score >= 30 && score < 40) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed - 800)
-    } else if (score >= 300) {
+      levelDisplay.innerHTML = '4'
+    } else if (score >= 50) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed - 900)
+      levelDisplay.innerHTML = 'Woah can\'t go faster!'
     }
   }
 
   // gameover
   function gameOver () {
     if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-      scoreDisplay.innerHTML = 'end'
+      scoreDisplay.innerHTML = 'Game Over! Final Score ' + score
       clearInterval(timerId)
     }
   }
