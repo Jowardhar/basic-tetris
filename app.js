@@ -256,22 +256,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // level speed up
   function speedUp () {
-    if (score >= 0 && score < 10) {
+    if (score >= 0 && score < 50) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed)
-    } else if (score >= 10 && score < 20) {
+    } else if (score >= 50 && score < 100) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed - 200)
       levelDisplay.innerHTML = '2'
-    } else if (score >= 20 && score < 30) {
+    } else if (score >= 100 && score < 200) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed - 500)
       levelDisplay.innerHTML = '3'
-    } else if (score >= 30 && score < 40) {
+    } else if (score >= 200 && score < 300) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed - 800)
       levelDisplay.innerHTML = '4'
-    } else if (score >= 50) {
+    } else if (score >= 300) {
       clearInterval(timerId)
       timerId = setInterval(moveDown, timerIntervalSpeed - 900)
       levelDisplay.innerHTML = 'Woah can\'t go faster!'
