@@ -1,10 +1,19 @@
 .container {
   display:flex;
 }
+.startButton {
+  background-color: #4281A4;
+  color: #E4DFDA;
+  padding: 10px 10px
+  display: flex;
+}
+.score {
+  margin: auto;
+}
 .grid {
   width: 200px;
   height: 400px;
-  background-color: yellow;
+  background-color: #82204A;
   display: flex;
   flex-wrap: wrap;
 }
@@ -23,7 +32,7 @@
   height: 80px;
   display: flex;
   flex-wrap: wrap;
-  background-color: orange;
+  background-color: #231123;
 
 }
 

@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = 0
   const timerIntervalSpeed = 1000
   const colors = [
-    'blue',
-    'green',
-    'purple',
-    'red',
-    'orange'
+    '#AEC5EB',
+    '#F9DEC9',
+    '#E9AFA3',
+    '#7B4B94',
+    '#D33F49'
   ]
 
   // The Tetrominoes
